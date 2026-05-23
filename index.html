@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Munim's Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', 'Trebuchet MS', Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0f7ff, #fff3c4);
+      color: #263238;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffffcc;
+      backdrop-filter: blur(8px);
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #263238;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ff6b35;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 70px 8%;
+    }
+
+    .hero-text h1 {
+      font-size: 54px;
+      color: #1d3557;
+      margin-bottom: 15px;
+    }
+
+    .hero-text h1 span {
+      color: #ff6b35;
+    }
+
+    .hero-text p {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #2ec4b6;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff6b35;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 8px 18px rgba(255, 107, 53, 0.35);
+    }
+
+    .photo-card {
+      background: white;
+      border-radius: 30px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+      transform: rotate(2deg);
+    }
+
+    .photo-card img {
+      width: 100%;
+      max-width: 360px;
+      height: 420px;
+      object-fit: contain;
+      border-radius: 25px;
+      border: 8px solid #fff3c4;
+      background: #f1f1f1;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-secondary {
+      background: #2ec4b6;
+      box-shadow: 0 8px 18px rgba(46, 196, 182, 0.35);
+    }
+
+    .photo-card p {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #1d3557;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 38px;
+      color: #1d3557;
+      margin-bottom: 35px;
+    }
+
+    .about-box {
+      background: white;
+      border-radius: 25px;
+      padding: 35px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      font-size: 21px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card .icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #ff6b35;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .games-wrap {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.1);
+    }
+
+    .game-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .game-tab {
+      border: 0;
+      background: #e8f4ff;
+      color: #1d3557;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .game-tab.active {
+      background: #ff6b35;
+      color: white;
+    }
+
+    .game-panel {
+      display: none;
+      text-align: center;
+    }
+
+    .game-panel.active {
+      display: block;
+    }
+
+    .game-panel h3 {
+      color: #1d3557;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .game-btn {
+      border: 0;
+      background: #2ec4b6;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 8px;
+      font-size: 16px;
+    }
+
+    .tic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 90px);
+      justify-content: center;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .tic-cell {
+      width: 90px;
+      height: 90px;
+      border: 0;
+      border-radius: 18px;
+      background: #fff3c4;
+      font-size: 38px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #1d3557;
+    }
+
+    .question-box,
+    .math-box {
+      background: #f4fbff;
+      padding: 24px;
+      border-radius: 22px;
+      margin: 18px auto;
+      max-width: 650px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #1d3557;
+    }
+
+    #drawCanvas {
+      width: 100%;
+      max-width: 700px;
+      height: 320px;
+      border: 5px dashed #2ec4b6;
+      border-radius: 22px;
+      background: #fffdf2;
+      touch-action: none;
+    }
+
+    .family-list {
+      max-width: 800px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .family-member {
+      background: white;
+      padding: 22px;
+      border-radius: 22px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    footer {
+      background: #1d3557;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 850px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      .cards,
+      .family-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Munim</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#games">Fun Games</a>
+      <a href="#family">Family</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="badge">KG Student</div>
+        <h1>Hello, I am <span>Munim</span>!</h1>
+        <p>I read in KG at Averrose International School. This is my colorful portfolio website about me, my fun games, activities, and my lovely family.</p>
+        <div class="hero-btns">
+          <a href="#about" class="btn">Know About Me</a>
+          <a href="#games" class="btn btn-secondary">Play Games</a>
+        </div>
+      </div>
+
+      <div class="photo-card">
+        <img src="img/munim.png" alt="Munim posing with a colorful blue and yellow macaw" />
+        <p>Munim's Photo</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-box">
+        <p>My name is Munim. I am a happy and curious KG student at Averrose International School. I love learning new things, playing with friends, drawing, and spending time with my family.</p>
+      </div>
+    </section>
+
+    <section id="fun">
+      <h2 class="section-title">Fun Games & Activities</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">📚</div>
+          <h3>Reading</h3>
+          <p>I enjoy learning from books and school lessons.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎮</div>
+          <h3>Playing</h3>
+          <p>I like playing games and having fun with friends.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎨</div>
+          <h3>Creative Work</h3>
+          <p>I enjoy drawing, coloring, and creative activities.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="games">
+      <h2 class="section-title">Fun Games</h2>
+      <div class="games-wrap">
+        <div class="game-tabs">
+          <button class="game-tab active" onclick="showGame('tictac', this)">❌ Tic Tac Toe</button>
+          <button class="game-tab" onclick="showGame('brain', this)">🧠 Brainstorming</button>
+          <button class="game-tab" onclick="showGame('math', this)">📚 Study Game</button>
+          <button class="game-tab" onclick="showGame('drawing', this)">🎨 Drawing</button>
+          <button class="game-tab" onclick="showGame('shapes', this)">🧩 Match Shapes</button>
+        </div>
+
+        <div id="tictac" class="game-panel active">
+          <h3>Tic Tac Toe</h3>
+          <p>Play with a friend. First player is X.</p>
+          <div class="tic-grid" id="ticGrid"></div>
+          <p id="ticStatus">Player turn: X</p>
+          <p id="ticHint">Keep playing!</p>
+          <button class="game-btn" onclick="resetTicTac()">Reset Game</button>
+        </div>
+
+        <div id="brain" class="game-panel">
+          <h3>Brainstorming Challenge</h3>
+          <div class="question-box" id="brainQuestion">Click the button to get a question!</div>
+          <button class="game-btn" onclick="newBrainQuestion()">New Question</button>
+        </div>
+
+        <div id="drawing" class="game-panel">
+          <h3>Drawing Board</h3>
+          <p>Draw anything using mouse or finger.</p>
+          <canvas id="drawCanvas" width="700" height="320"></canvas><br />
+          <button class="game-btn" onclick="clearDrawing()">Clear Drawing</button>
+        </div>
+
+        <div id="math" class="game-panel">
+          <h3>Study Game</h3>
+          <div class="math-box" id="mathQuestion">Click Start to get a study question.</div>
+          <input id="mathAnswer" type="text" placeholder="Your answer" style="padding:12px;border-radius:14px;border:2px solid #ddd;font-size:18px;" />
+          <button class="game-btn" onclick="checkMathAnswer()">Check</button>
+          <button class="game-btn" onclick="newMathQuestion()">Start / Next</button>
+          <p id="mathResult"></p>
+        </div>
+
+        <div id="shapes" class="game-panel">
+          <h3>Match Shapes</h3>
+          <div class="question-box" id="shapeQuestion">Click below to start matching shapes.</div>
+          <button class="game-btn" onclick="newShapeQuestion()">Next Shape</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="family">
+      <h2 class="section-title">Family Members</h2>
+      <p style="text-align:center;font-size:21px;max-width:800px;margin:0 auto 30px;">My family loves me, supports me, and makes my life beautiful.</p>
+      <div class="family-list">
+        <div class="family-member">👨 Father: Mehedi Hasan</div>
+        <div class="family-member">👩 Mother: Tanha Hasan Topy</div>
+        <div class="family-member">👦 Brother: Meherab Hasan Mahim</div>
+        <div class="family-member">👧 Sister: Tasmia Hasan Maliha</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Munim's Portfolio. Made with ❤️</p>
+  </footer>
+  <script>
+    function showGame(id, btn) {
+      document.querySelectorAll('.game-panel').forEach(panel => panel.classList.remove('active'));
+      document.querySelectorAll('.game-tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    let currentPlayer = 'X';
+    let board = Array(9).fill('');
+
+    function drawTicTac() {
+      const grid = document.getElementById('ticGrid');
+      grid.innerHTML = '';
+      board.forEach((value, index) => {
+        const cell = document.createElement('button');
+        cell.className = 'tic-cell';
+        cell.textContent = value;
+        cell.onclick = () => playTicTac(index);
+        grid.appendChild(cell);
+      });
+    }
+
+    function playTicTac(index) {
+      if (board[index] || checkWinner()) return;
+      board[index] = currentPlayer;
+      const winner = checkWinner();
+      if (winner) {
+        document.getElementById('ticStatus').textContent = `Player ${winner} wins! 🎉`;
+        document.getElementById('ticHint').textContent = 'Great game!';
+      } else if (!board.includes('')) {
+        document.getElementById('ticStatus').textContent = 'Game draw! 🤝';
+        document.getElementById('ticHint').textContent = 'Try again!';
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        document.getElementById('ticStatus').textContent = `Player turn: ${currentPlayer}`;
+        document.getElementById('ticHint').textContent = 'Keep playing!';
+      }
+      drawTicTac();
+    }
+
+    function checkWinner() {
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      for (const [a,b,c] of wins) {
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) return board[a];
+      }
+      return null;
+    }
+
+    function resetTicTac() {
+      board = Array(9).fill('');
+      currentPlayer = 'X';
+      document.getElementById('ticStatus').textContent = 'Player turn: X';
+      document.getElementById('ticHint').textContent = 'Keep playing!';
+      drawTicTac();
+    }
+
+    const brainQuestions = Array.from({ length: 120 }, (_, i) => {
+      const prompts = [
+        'If you could build',
+        'Imagine you discovered',
+        'What would happen if',
+        'How can we improve',
+        'Design a new',
+        'Create a fun',
+        'Think about',
+        'Invent a magical'
+      ];
+
+      const topics = [
+        'a robot school helper?',
+        'a flying backpack?',
+        'animals could speak?',
+        'your classroom?',
+        'superhero costume?',
+        'space playground?',
+        'underwater city?',
+        'friendly dragon?',
+        'future bicycle?',
+        'smart pencil?',
+        'new video game?',
+        'tree house kingdom?'
+      ];
+
+      return `${i + 1}. ${prompts[i % prompts.length]} ${topics[i % topics.length]}`;
+    });
+
+    function newBrainQuestion() {
+      const q = brainQuestions[Math.floor(Math.random() * brainQuestions.length)];
+      document.getElementById('brainQuestion').textContent = q;
+    }
+
+    let correctAnswer = '';
+
+    const studyQuestions = Array.from({ length: 120 }, (_, i) => {
+      const a = (i % 20) + 1;
+      const b = ((i * 2) % 20) + 1;
+
+      const types = [
+        {
+          q: `What is ${a} + ${b}?`,
+          a: String(a + b)
+        },
+        {
+          q: `What is ${a + 10} - ${b}?`,
+          a: String((a + 10) - b)
+        },
+        {
+          q: `Spell the number ${a}.`,
+          a: ['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'][a - 1]
+        },
+        {
+          q: `Which planet do we live on?`,
+          a: 'earth'
+        }
+      ];
+
+      return types[i % types.length];
+    });
+
+    function newMathQuestion() {
+      const item = studyQuestions[Math.floor(Math.random() * studyQuestions.length)];
+      correctAnswer = item.a.toLowerCase();
+      document.getElementById('mathQuestion').textContent = item.q;
+      document.getElementById('mathAnswer').value = '';
+      document.getElementById('mathResult').textContent = '';
+    }
+
+    function checkMathAnswer() {
+      const answer = document.getElementById('mathAnswer').value.trim().toLowerCase();
+      document.getElementById('mathResult').textContent = answer === correctAnswer ? 'Correct! Great job 🎉' : `Try again 🙂 Correct answer: ${correctAnswer}`;
+    }
+
+    const shapes = Array.from({ length: 120 }, (_, i) => {
+      const shapeList = ['Circle','Square','Triangle','Rectangle','Star','Oval','Heart','Diamond','Pentagon','Hexagon'];
+      const colors = ['Red','Blue','Green','Yellow','Purple','Orange'];
+      return `${colors[i % colors.length]} ${shapeList[i % shapeList.length]}`;
+    });
+
+    function newShapeQuestion() {
+      const shape = shapes[Math.floor(Math.random() * shapes.length)];
+      document.getElementById('shapeQuestion').textContent = `Find and match this shape: ${shape}`;
+    }
+
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const point = e.touches ? e.touches[0] : e;
+      return {
+        x: (point.clientX - rect.left) * (canvas.width / rect.width),
+        y: (point.clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    function startDraw(e) {
+      drawing = true;
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const pos = getPos(e);
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#1d3557';
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      drawing = false;
+    }
+
+    function clearDrawing() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseleave', stopDraw);
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDraw);
+
+    drawTicTac();
+  </script>
+</body>
+</html>
